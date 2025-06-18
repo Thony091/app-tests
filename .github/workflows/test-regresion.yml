@@ -20,11 +20,24 @@ jobs:
       
       - name: Instalar dependencias
         run: |
+          echo "Directorio actual:"
+          pwd
+          
+          echo "Contenido del directorio antes de venv:"
+          ls -la
+          
+          python -m venv venv
+          
+          echo "Contenido del directorio DESPUÉS de venv:"
+          ls -la
+          
+          echo "Contenido de la carpeta venv/bin:"
+          ls -la venv/bin
           python -m venv venv
           venv/bin/python -m pip install --upgrade pip
           venv/bin/pip install -r requirements.txt
           
       - name: Ejecutar pruebas
         run: |
-          source venv/bin/activate
+          venv/bin/pytest
           pytest
